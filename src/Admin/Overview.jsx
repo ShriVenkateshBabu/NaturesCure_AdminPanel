@@ -47,7 +47,7 @@ const todayAppointments = [
     statusClass: "bg-green-100 text-green-700",
   },
   {
-    patient: "Priya Sharma",
+    patient: "Priya Sharm",
     time: "12:00 PM",
     type: "Therapy",
     status: "Pending",
