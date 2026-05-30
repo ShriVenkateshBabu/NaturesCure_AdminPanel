@@ -1,4 +1,4 @@
-import {supabase} from "../supabase";
+import { supabase } from "../supabase";
 import { useState, useRef, useEffect } from "react";
 import {
   FileText,
@@ -979,223 +979,222 @@ export default function CaseSheet() {
   }, [form.ht, form.height, form.wt, form.weight]);
 
   const handleExport = async (shareWhatsApp = false) => {
-  const errs = validate(form);
+    const errs = validate(form);
 
-  if (Object.keys(errs).length > 0) {
-    setErrors(errs);
-    setShowValidation(true);
-    return;
-  }
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      setShowValidation(true);
+      return;
+    }
 
-  setErrors({});
-  setShowValidation(false);
+    setErrors({});
+    setShowValidation(false);
 
-  // setLoading(true);
+    // setLoading(true);
 
-  // =========================
-  // SAVE ALL DATA TO SUPABASE
-  // =========================
-  const payload = {
-    // Patient Info
-    patient_id: form.patientId,
-    name: form.name,
-    contact: form.contact,
-    emergency_contact: form.emergencyContact,
-    emergency_name: form.emergencyName,
-    ref_by: form.refBy,
-    age: form.age,
-    dob: form.dob || null,
-    sex: form.sex,
-    blood_group: form.bloodGroup,
-    marital_status: form.maritalStatus,
-    occupation: form.occupation,
-    religion: form.religion,
-    address: form.address,
-    email: form.email,
+    // =========================
+    // SAVE ALL DATA TO SUPABASE
+    // =========================
+    // const payload = {
+    //   // Patient Info
+    //   patient_id: form.patientId,
+    //   name: form.name,
+    //   contact: form.contact,
+    //   emergency_contact: form.emergencyContact,
+    //   emergency_name: form.emergencyName,
+    //   ref_by: form.refBy,
+    //   age: form.age,
+    //   dob: form.dob || null,
+    //   sex: form.sex,
+    //   blood_group: form.bloodGroup,
+    //   marital_status: form.maritalStatus,
+    //   occupation: form.occupation,
+    //   religion: form.religion,
+    //   address: form.address,
+    //   email: form.email,
 
-    // Visit Dates
-    visit_date: form.visitDate || null,
-    followup_date: form.followupDate || null,
-    next_review_date: form.nextReviewDate || null,
+    //   // Visit Dates
+    //   visit_date: form.visitDate || null,
+    //   followup_date: form.followupDate || null,
+    //   next_review_date: form.nextReviewDate || null,
 
-    // Body Measurements
-    height: form.height,
-    weight: form.weight,
-    bmi: form.bmi,
+    //   // Body Measurements
+    //   height: form.height,
+    //   weight: form.weight,
+    //   bmi: form.bmi,
 
-    // Lifestyle
-    food_habits: form.foodHabits,
-    addiction_history: form.addictionHistory,
-    allergies: form.allergies,
-    existing_meds: form.existingMeds,
+    //   // Lifestyle
+    //   food_habits: form.foodHabits,
+    //   addiction_history: form.addictionHistory,
+    //   allergies: form.allergies,
+    //   existing_meds: form.existingMeds,
 
-    // Complaints
-    aggravating_factors: form.aggravatingFactors,
-    relieving_factors: form.relievingFactors,
-    associated_symptoms: form.associatedSymptoms,
+    //   // Complaints
+    //   aggravating_factors: form.aggravatingFactors,
+    //   relieving_factors: form.relievingFactors,
+    //   associated_symptoms: form.associatedSymptoms,
 
-    // Medical History
-    past_medical_history: form.pastMedicalHistory,
-    surgical_history: form.surgicalHistory,
-    drug_history: form.drugHistory,
-    family_history: form.familyHistory,
-    immunization_history: form.immunizationHistory,
-    previous_treatments: form.previousTreatments,
+    //   // Medical History
+    //   past_medical_history: form.pastMedicalHistory,
+    //   surgical_history: form.surgicalHistory,
+    //   drug_history: form.drugHistory,
+    //   family_history: form.familyHistory,
+    //   immunization_history: form.immunizationHistory,
+    //   previous_treatments: form.previousTreatments,
 
-    // Vitals
-    bp: form.bp,
-    hr: form.hr,
-    spo2: form.spo2,
-    temp: form.temp,
-    pr: form.pr,
-    ht: form.ht,
-    wt: form.wt,
+    //   // Vitals
+    //   bp: form.bp,
+    //   hr: form.hr,
+    //   spo2: form.spo2,
+    //   temp: form.temp,
+    //   pr: form.pr,
+    //   ht: form.ht,
+    //   wt: form.wt,
 
-    // Menstrual
-    menarche: form.menarche,
-    dysmenorrhea: form.dysmenorrhea,
-    cycle: form.cycle,
-    leucorrhea: form.leucorrhea,
-    flow: form.flow,
-    menopause: form.menopause,
-    lmp: form.lmp || null,
+    //   // Menstrual
+    //   menarche: form.menarche,
+    //   dysmenorrhea: form.dysmenorrhea,
+    //   cycle: form.cycle,
+    //   leucorrhea: form.leucorrhea,
+    //   flow: form.flow,
+    //   menopause: form.menopause,
+    //   lmp: form.lmp || null,
 
-    // GPE
-    gait: form.gait,
-    thirst: form.thirst,
-    eyes: form.eyes,
-    micturition: form.micturition,
-    tongue: form.tongue,
-    appetite: form.appetite,
-    sleep: form.sleep,
-    nails: form.nails,
-    bowel: form.bowel,
-    skin: form.skin,
-    sweat: form.sweat,
-    general_appearance: form.generalAppearance,
-    hydration: form.hydration,
+    //   // GPE
+    //   gait: form.gait,
+    //   thirst: form.thirst,
+    //   eyes: form.eyes,
+    //   micturition: form.micturition,
+    //   tongue: form.tongue,
+    //   appetite: form.appetite,
+    //   sleep: form.sleep,
+    //   nails: form.nails,
+    //   bowel: form.bowel,
+    //   skin: form.skin,
+    //   sweat: form.sweat,
+    //   general_appearance: form.generalAppearance,
+    //   hydration: form.hydration,
 
-    // Systemic Examination
-    respiratory_system: form.respiratorySystem,
-    gastrointestinal_system: form.gastrointestinalSystem,
-    renal_system: form.renalSystem,
-    locomotor_system: form.locomotorSystem,
-    cardiovascular_system: form.cardiovascularSystem,
-    cns: form.cns,
-    obs_g: form.obsG,
-    obs_a: form.obsA,
-    obs_l: form.obsL,
-    obs_s: form.obsS,
-    others: form.others,
+    //   // Systemic Examination
+    //   respiratory_system: form.respiratorySystem,
+    //   gastrointestinal_system: form.gastrointestinalSystem,
+    //   renal_system: form.renalSystem,
+    //   locomotor_system: form.locomotorSystem,
+    //   cardiovascular_system: form.cardiovascularSystem,
+    //   cns: form.cns,
+    //   obs_g: form.obsG,
+    //   obs_a: form.obsA,
+    //   obs_l: form.obsL,
+    //   obs_s: form.obsS,
+    //   others: form.others,
 
-    // PSI
-    psi_sad: form.psiSad,
-    psi_anxious: form.psiAnxious,
-    psi_tired: form.psiTired,
-    psi_concentrate: form.psiConcentrate,
-    psi_hopeless: form.psiHopeless,
-    psi_interest: form.psiInterest,
+    //   // PSI
+    //   psi_sad: form.psiSad,
+    //   psi_anxious: form.psiAnxious,
+    //   psi_tired: form.psiTired,
+    //   psi_concentrate: form.psiConcentrate,
+    //   psi_hopeless: form.psiHopeless,
+    //   psi_interest: form.psiInterest,
 
-    // Diagnosis
-    differential_diagnosis: form.differentialDiagnosis,
-    investigations: form.investigations,
-    provisional_diagnosis: form.provisionalDiagnosis,
-    icd10: form.icd10,
-    ayush_diagnosis: form.ayushDiagnosis,
+    //   // Diagnosis
+    //   differential_diagnosis: form.differentialDiagnosis,
+    //   investigations: form.investigations,
+    //   provisional_diagnosis: form.provisionalDiagnosis,
+    //   icd10: form.icd10,
+    //   ayush_diagnosis: form.ayushDiagnosis,
 
-    // Pulse Diagnosis
-    pulse_rhythm: form.pulseRhythm,
-    pulse_volume: form.pulseVolume,
-    pulse_symmetry: form.pulseSymmetry,
-    pulse_dosha: form.pulseDosha,
-    iris_diagnosis: form.irisDiagnosis,
-    prakriti: form.prakriti,
-    body_constitution: form.bodyConstitution,
+    //   // Pulse Diagnosis
+    //   pulse_rhythm: form.pulseRhythm,
+    //   pulse_volume: form.pulseVolume,
+    //   pulse_symmetry: form.pulseSymmetry,
+    //   pulse_dosha: form.pulseDosha,
+    //   iris_diagnosis: form.irisDiagnosis,
+    //   prakriti: form.prakriti,
+    //   body_constitution: form.bodyConstitution,
 
-    // Treatment
-    diagnosis: form.diagnosis,
-    treatment: form.treatment,
-    medicines: form.medicines,
-    yoga_therapy: form.yogaTherapy,
-    diet_recommendations: form.dietRecommendations,
-    hydrotherapy: form.hydrotherapy,
-    lifestyle_advice: form.lifestyleAdvice,
-    treatment_duration: form.treatmentDuration,
-    followup_instructions: form.followupInstructions,
+    //   // Treatment
+    //   diagnosis: form.diagnosis,
+    //   treatment: form.treatment,
+    //   medicines: form.medicines,
+    //   yoga_therapy: form.yogaTherapy,
+    //   diet_recommendations: form.dietRecommendations,
+    //   hydrotherapy: form.hydrotherapy,
+    //   lifestyle_advice: form.lifestyleAdvice,
+    //   treatment_duration: form.treatmentDuration,
+    //   followup_instructions: form.followupInstructions,
 
-    // Consent
-    consent_given: form.consentGiven,
-    patient_signature: form.patientSignature,
-    doctor_signature: form.doctorSignature,
-  };
+    //   // Consent
+    //   consent_given: form.consentGiven,
+    //   patient_signature: form.patientSignature,
+    //   doctor_signature: form.doctorSignature,
+    // };
 
-  const { data, error } = await supabase
-    .from("patients")
-    .insert([payload])
-    .select();
+    // const { data, error } = await supabase
+    //   .from("patients")
+    //   .insert([payload])
+    //   .select();
 
-  // setLoading(false);
+    // // setLoading(false);
 
-  if (error) {
-    console.error(error);
-    alert(error.message);
-    return;
-  }
+    // if (error) {
+    //   console.error(error);
+    //   alert(error.message);
+    //   return;
+    // }
 
-  console.log("Saved Successfully:", data);
+    // console.log("Saved Successfully:", data);
 
-  // =========================
-  // GENERATE PDF
-  // =========================
-  const html = buildPDFHtml(form);
+    // =========================
+    // GENERATE PDF
+    // =========================
+    const html = buildPDFHtml(form, complaints, followups);
 
-  const printWindow = window.open("", "_blank");
+    const printWindow = window.open("", "_blank");
 
-  printWindow.document.write(html);
+    printWindow.document.write(html);
 
-  printWindow.document.close();
+    printWindow.document.close();
 
-  // =========================
-  // WHATSAPP SHARE
-  // =========================
-  if (shareWhatsApp) {
-    const msg = encodeURIComponent(
-      `📋 *Case Sheet — ${form.name}*\n` +
-      `🆔 Patient ID: ${form.patientId}\n` +
-      `📅 Date: ${form.visitDate}\n` +
-      `📞 Contact: +91 ${form.contact}\n` +
-      `🩺 Diagnosis: ${form.diagnosis}\n\n` +
-      `_Issued by ${HOSPITAL.name}_`
-    );
+    // =========================
+    // WHATSAPP SHARE
+    // =========================
+    if (shareWhatsApp) {
+      const msg = encodeURIComponent(
+        `📋 *Case Sheet — ${form.name}*\n` +
+          `🆔 Patient ID: ${form.patientId}\n` +
+          `📅 Date: ${form.visitDate}\n` +
+          `📞 Contact: +91 ${form.contact}\n` +
+          `🩺 Diagnosis: ${form.diagnosis}\n\n` +
+          `_Issued by ${HOSPITAL.name}_`,
+      );
 
-    const phone = form.contact ? `91${form.contact}` : "";
+      const phone = form.contact ? `91${form.contact}` : "";
+
+      setTimeout(() => {
+        window.open(
+          phone
+            ? `https://wa.me/${phone}?text=${msg}`
+            : `https://wa.me/?text=${msg}`,
+          "_blank",
+        );
+      }, 800);
+    }
+
+    // =========================
+    // PRINT
+    // =========================
+    setTimeout(() => {
+      printWindow.print();
+    }, 500);
+
+    // =========================
+    // SUCCESS MESSAGE
+    // =========================
+    setShowSuccess(true);
 
     setTimeout(() => {
-      window.open(
-        phone
-          ? `https://wa.me/${phone}?text=${msg}`
-          : `https://wa.me/?text=${msg}`,
-        "_blank"
-      );
-    }, 800);
-  }
-
-  // =========================
-  // PRINT
-  // =========================
-  setTimeout(() => {
-    printWindow.print();
-  }, 500);
-
-  // =========================
-  // SUCCESS MESSAGE
-  // =========================
-  setShowSuccess(true);
-
-  setTimeout(() => {
-    setShowSuccess(false);
-  }, 3000);
-
+      setShowSuccess(false);
+    }, 3000);
   };
 
   const reset = () => {
