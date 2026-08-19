@@ -88,8 +88,9 @@ export default function AdminLogin() {
             {loading ? "Signing in..." : "Sign in"}
           </button>
           <button
-          onClick={()=>navigate("/")}
-          className="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-slate-800 transition disabled:opacity-60 shadow-lg">
+            onClick={() => navigate("/")}
+            className="w-full py-3 bg-slate-900 text-white rounded-xl font-semibold text-sm hover:bg-slate-800 transition disabled:opacity-60 shadow-lg"
+          >
             Back to Home
           </button>
         </form>

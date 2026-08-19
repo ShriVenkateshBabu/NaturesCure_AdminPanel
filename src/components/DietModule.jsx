@@ -58,6 +58,100 @@ const DIET_PRESETS = {
     "Ginger Water",
     "Sabja Water",
   ],
+  // ── Evening / Dinner fruit-and-vegetable list ──
+  "Evening Fruits": [
+    "Pomegranate",
+    "Apple",
+    "Pear",
+    "Grapes",
+    "Jackfruit",
+    "Orange",
+    "Papaya",
+    "Guava",
+    "Pineapple",
+    "Muskmelon",
+    "Cucumber",
+    "Fig",
+    "Raw Banana",
+  ],
+  Toppings: [
+    "Peanut",
+    "Cashew",
+    "Almond (boiled/roasted)",
+    "Dried Fig",
+    "Coriander (leaf)",
+    "Fresh Avaram Poo",
+  ],
+  "Leaves & Flowers": [
+    "Coriander",
+    "Curry Leaves",
+    "Mint",
+    "Avaram Poo — fresh",
+    "Avaram Poo — dried",
+  ],
+  "Raw / Boiled Vegetables": [
+    "Cabbage",
+    "Carrot",
+    "Lady's Finger",
+    "Ash Gourd",
+    "Ridge Gourd",
+    "Bottle Gourd",
+    "Paneer",
+    "Mushroom",
+    "Ivy Gourd",
+    "Avarai Kai",
+    "Beans",
+  ],
+  "Boiled Foods": [
+    "Soybean",
+    "Kidney Beans",
+    "Sundal",
+    "Peanut",
+    "Green Gram",
+  ],
+  Sprouts: ["Sesame", "Green Gram", "Ragi", "Peanut", "Fenugreek"],
+  // ── Empty-stomach / seed-cycling & herbal notes ──
+  "Morning / Empty Stomach": [
+    "Bitter Gourd Juice",
+    "Ginger Chewing (1 tsp, ~30 min after)",
+    "Cinnamon Water (~200ml, boiled)",
+    "Lemon (squeezed into cinnamon water)",
+  ],
+  "Seed Cycling & Herbal": [
+    "Seed Cycling",
+    "Coconut Oil",
+    "Moringa",
+    "Amla",
+    "Jaggery",
+    "Ghee",
+    "Sesame",
+    "Fenugreek",
+    "Jeera / Cumin",
+    "Karuppatti Karasayam [unclear]",
+  ],
+  // ── Condition-specific suggestions from notes (verify with doctor) ──
+  "Kidney Support [Discuss w/ Doctor]": [
+    "Tea + Jeera + Fenugreek",
+    "Karuppatti Karasayam [unclear]",
+  ],
+  "Lung Support [Discuss w/ Doctor]": [
+    "Boiled Amla (2 pcs) + Ginger, reduced 250ml→150ml + Honey",
+  ],
+  "Piles / IBS [Discuss w/ Doctor]": [
+    "Aloe Vera Fomentation [unclear]",
+    "Buttermilk",
+    "Fiber-rich foods",
+  ],
+  "Fatty Liver [Discuss w/ Doctor]": [
+    "Orange + Mint",
+    "Weight management / activity (non-food)",
+  ],
+  "Gallstones [Discuss w/ Doctor]": [
+    "Apple + Cinnamon",
+    "Low-fat dietary pattern",
+  ],
+  // ── Night / raw diet ──
+  "Night Raw Diet": ["Guava", "Papaya", "Apple", "Pear", "Pomegranate"],
 };
 
 const DIET_EMOJIS = {
@@ -66,6 +160,20 @@ const DIET_EMOJIS = {
   Dinner: "🍲",
   "Juice Therapy": "🥤",
   "Infused Water": "🫙",
+  "Evening Fruits": "🍎",
+  Toppings: "🥜",
+  "Leaves & Flowers": "🌿",
+  "Raw / Boiled Vegetables": "🥦",
+  "Boiled Foods": "🍲",
+  Sprouts: "🌱",
+  "Morning / Empty Stomach": "🌅",
+  "Seed Cycling & Herbal": "🫘",
+  "Kidney Support [Discuss w/ Doctor]": "🩺",
+  "Lung Support [Discuss w/ Doctor]": "🩺",
+  "Piles / IBS [Discuss w/ Doctor]": "🩺",
+  "Fatty Liver [Discuss w/ Doctor]": "🩺",
+  "Gallstones [Discuss w/ Doctor]": "🩺",
+  "Night Raw Diet": "🌙",
 };
 
 const THERAPY_PRESETS = {
