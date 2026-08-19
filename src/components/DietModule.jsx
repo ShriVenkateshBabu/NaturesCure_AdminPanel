@@ -13,33 +13,6 @@ const HOSPITAL = {
 };
 
 const DIET_PRESETS = {
-  Breakfast: [
-    "Idly / Dosa",
-    "Oats Porridge",
-    "Fruit Salad",
-    "Sprouts",
-    "Ragi Kanji",
-    "Poha",
-    "Upma",
-  ],
-  Lunch: [
-    "Brown Rice",
-    "Millet Rice",
-    "Sambar & Veg",
-    "Salad",
-    "Buttermilk",
-    "Kootu",
-    "Rasam",
-  ],
-  Dinner: [
-    "Wheat Chapathi",
-    "Vegetable Soup",
-    "Steamed Veg",
-    "Khichdi",
-    "Herbal Tea",
-    "Broken Wheat",
-    "Vegetable Stew",
-  ],
   "Juice Therapy": [
     "Bitter Gourd Juice",
     "Ash Gourd Juice",
@@ -102,13 +75,7 @@ const DIET_PRESETS = {
     "Avarai Kai",
     "Beans",
   ],
-  "Boiled Foods": [
-    "Soybean",
-    "Kidney Beans",
-    "Sundal",
-    "Peanut",
-    "Green Gram",
-  ],
+  "Boiled Foods": ["Soybean", "Kidney Beans", "Sundal", "Peanut", "Green Gram"],
   Sprouts: ["Sesame", "Green Gram", "Ragi", "Peanut", "Fenugreek"],
   // ── Empty-stomach / seed-cycling & herbal notes ──
   "Morning / Empty Stomach": [
@@ -155,7 +122,6 @@ const DIET_PRESETS = {
 };
 
 const DIET_EMOJIS = {
-  Breakfast: "🍚",
   Lunch: "🥗",
   Dinner: "🍲",
   "Juice Therapy": "🥤",
