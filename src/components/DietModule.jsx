@@ -13,6 +13,33 @@ const HOSPITAL = {
 };
 
 const DIET_PRESETS = {
+  Breakfast: [
+    "Idly / Dosa",
+    "Oats Porridge",
+    "Fruit Salad",
+    "Sprouts",
+    "Ragi Kanji",
+    "Poha",
+    "Upma",
+  ],
+  Lunch: [
+    "Brown Rice",
+    "Millet Rice",
+    "Sambar & Veg",
+    "Salad",
+    "Buttermilk",
+    "Kootu",
+    "Rasam",
+  ],
+  Dinner: [
+    "Wheat Chapathi",
+    "Vegetable Soup",
+    "Steamed Veg",
+    "Khichdi",
+    "Herbal Tea",
+    "Broken Wheat",
+    "Vegetable Stew",
+  ],
   "Juice Therapy": [
     "Bitter Gourd Juice",
     "Ash Gourd Juice",
@@ -31,59 +58,72 @@ const DIET_PRESETS = {
     "Ginger Water",
     "Sabja Water",
   ],
-  // ── Evening / Dinner fruit-and-vegetable list ──
-  "Evening Fruits": [
-    "Pomegranate",
-    "Apple",
-    "Pear",
-    "Grapes",
-    "Jackfruit",
-    "Orange",
-    "Papaya",
-    "Guava",
-    "Pineapple",
-    "Muskmelon",
-    "Cucumber",
-    "Fig",
-    "Raw Banana",
-  ],
-  Toppings: [
+  "Boiled Foods": [
+    "Soybean",
+    "Kidney Beans",
+    "Sundal",
     "Peanut",
-    "Cashew",
-    "Almond (boiled/roasted)",
-    "Dried Fig",
-    "Coriander (leaf)",
-    "Fresh Avaram Poo",
+    "Green Gram",
   ],
-  "Leaves & Flowers": [
-    "Coriander",
-    "Curry Leaves",
-    "Mint",
-    "Avaram Poo — fresh",
-    "Avaram Poo — dried",
-  ],
-  "Raw / Boiled Vegetables": [
-    "Cabbage",
-    "Carrot",
-    "Lady's Finger",
-    "Ash Gourd",
-    "Ridge Gourd",
-    "Bottle Gourd",
-    "Paneer",
-    "Mushroom",
-    "Ivy Gourd",
-    "Avarai Kai",
-    "Beans",
-  ],
-  "Boiled Foods": ["Soybean", "Kidney Beans", "Sundal", "Peanut", "Green Gram"],
-  Sprouts: ["Sesame", "Green Gram", "Ragi", "Peanut", "Fenugreek"],
-  // ── Empty-stomach / seed-cycling & herbal notes ──
-  "Morning / Empty Stomach": [
+  // ── Morning / empty-stomach notes, split into meaningfully-named steps ──
+  "Morning Detox Drink": [
     "Bitter Gourd Juice",
-    "Ginger Chewing (1 tsp, ~30 min after)",
+    "Ginger Chewing (1 tsp, ~30 min after juice)",
+  ],
+  "Morning Hydration": [
     "Cinnamon Water (~200ml, boiled)",
     "Lemon (squeezed into cinnamon water)",
   ],
+  // ── NIGHT RAW DIET — one complete dinner structure, in order:
+  //    Fruit Salad → Boiled/Steamed Vegetable Bowl → Sprouts → Toppings
+  "Night Raw Diet": {
+    "Fruit Salad": [
+      "Guava",
+      "Papaya",
+      "Apple",
+      "Pear",
+      "Pomegranate",
+      "Grapes",
+      "Orange",
+      "Pineapple",
+      "Muskmelon",
+      "Cucumber",
+      "Fig",
+      "Jackfruit",
+      "Raw Banana",
+    ],
+    "Boiled Vegetable Bowl": [
+      "Cabbage",
+      "Carrot",
+      "Lady's Finger",
+      "Ash Gourd",
+      "Ridge Gourd",
+      "Bottle Gourd",
+      "Ivy Gourd",
+      "Avarai Kai",
+      "Beans",
+      "Paneer",
+      "Mushroom",
+    ],
+    "Sprouted Protein Addition": [
+      "Green Gram Sprouts",
+      "Sesame Sprouts",
+      "Ragi Sprouts",
+      "Peanut Sprouts",
+      "Fenugreek Sprouts",
+    ],
+    "Nut and Seed Toppings": [
+      "Peanut",
+      "Cashew",
+      "Almond (boiled/roasted)",
+      "Dried Fig",
+      "Coriander",
+      "Curry Leaves",
+      "Mint",
+      "Fresh Avaram Poo",
+    ],
+  },
+  // ── Seed cycling & herbal notes ──
   "Seed Cycling & Herbal": [
     "Seed Cycling",
     "Coconut Oil",
@@ -117,29 +157,35 @@ const DIET_PRESETS = {
     "Apple + Cinnamon",
     "Low-fat dietary pattern",
   ],
-  // ── Night / raw diet ──
-  "Night Raw Diet": ["Guava", "Papaya", "Apple", "Pear", "Pomegranate"],
 };
 
 const DIET_EMOJIS = {
+  Breakfast: "🍚",
   Lunch: "🥗",
   Dinner: "🍲",
   "Juice Therapy": "🥤",
   "Infused Water": "🫙",
-  "Evening Fruits": "🍎",
-  Toppings: "🥜",
-  "Leaves & Flowers": "🌿",
-  "Raw / Boiled Vegetables": "🥦",
   "Boiled Foods": "🍲",
-  Sprouts: "🌱",
-  "Morning / Empty Stomach": "🌅",
+  "Morning Detox Drink": "🌅",
+  "Morning Hydration": "💧",
+  "Night Raw Diet": "🌙",
   "Seed Cycling & Herbal": "🫘",
   "Kidney Support [Discuss w/ Doctor]": "🩺",
   "Lung Support [Discuss w/ Doctor]": "🩺",
   "Piles / IBS [Discuss w/ Doctor]": "🩺",
   "Fatty Liver [Discuss w/ Doctor]": "🩺",
   "Gallstones [Discuss w/ Doctor]": "🩺",
-  "Night Raw Diet": "🌙",
+};
+
+// Per-subsection icons + eating order, used only for nested presets
+// (currently "Night Raw Diet") so the UI and printed chart both show
+// the fixed sequence: Fruit Salad → Boiled Vegetable Bowl → Sprouted
+// Protein Addition → Nut and Seed Toppings.
+const SUBSECTION_EMOJIS = {
+  "Fruit Salad": "🍇",
+  "Boiled Vegetable Bowl": "🥦",
+  "Sprouted Protein Addition": "🌱",
+  "Nut and Seed Toppings": "🥜",
 };
 
 const THERAPY_PRESETS = {
@@ -169,6 +215,28 @@ const THERAPY_PRESETS = {
     "Kotha Avarai 5 + Coconut 3pc",
   ],
 };
+
+// ─── Preset flattening helper ─────────────────────────────────────────────────
+// DIET_PRESETS[title] is normally a flat array of item names. A category can
+// instead be a nested object of { "Subsection Name": [items...] } — used by
+// "Night Raw Diet" so Fruit Salad / Boiled Vegetable Bowl / Sprouted Protein
+// Addition / Nut and Seed Toppings stay grouped as one dinner, in order,
+// rather than being treated as separate meals. This helper produces a flat
+// list of unique, stable keys (prefixed with the subsection so e.g. "Peanut"
+// under Toppings and "Peanut Sprouts" under Sprouts never collide) alongside
+// the plain label shown to the user.
+function getPresetEntries(preset) {
+  if (Array.isArray(preset)) {
+    return preset.map((item) => ({ key: item, label: item, subsection: null }));
+  }
+  const entries = [];
+  Object.keys(preset).forEach((sub) => {
+    preset[sub].forEach((item) => {
+      entries.push({ key: `${sub} :: ${item}`, label: item, subsection: sub });
+    });
+  });
+  return entries;
+}
 
 // ─── Shared styles ────────────────────────────────────────────────────────────
 const S = {
@@ -294,20 +362,89 @@ function YNPills({ value, onChange }) {
 }
 
 // ─── Collapsible diet card (mirrors DietModule's DietCard) ───────────────────
-function DietCard({ title, vals, setVals, custom, setCustom }) {
-  const [open, setOpen] = useState(true);
-  const items = DIET_PRESETS[title];
+// ─── Quantity stepper (Night Raw Diet only — slices/pieces/portion count) ────
+function QtyStepper({ value, onChange }) {
+  const v = value || 1;
+  const dec = () => onChange(Math.max(1, v - 1));
+  const inc = () => onChange(v + 1);
+  const btnStyle = {
+    width: 15,
+    height: 15,
+    lineHeight: "15px",
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    color: "#1a5c38",
+    fontWeight: 700,
+    fontSize: 11,
+    cursor: "pointer",
+    flexShrink: 0,
+  };
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 2,
+        background: "#f4fbf7",
+        border: "1px solid #bcd4c8",
+        borderRadius: 10,
+        padding: "0 3px",
+        flexShrink: 0,
+      }}
+    >
+      <button type="button" onClick={dec} style={btnStyle} aria-label="Decrease quantity">
+        −
+      </button>
+      <span
+        style={{
+          fontSize: 10,
+          fontWeight: 700,
+          color: "#1a5c38",
+          minWidth: 14,
+          textAlign: "center",
+        }}
+      >
+        {v}
+      </span>
+      <button type="button" onClick={inc} style={btnStyle} aria-label="Increase quantity">
+        +
+      </button>
+    </div>
+  );
+}
 
-  const toggleVal = (item, v) =>
-    setVals((prev) => ({ ...prev, [item]: prev[item] === v ? "" : v }));
+function DietCard({ title, vals, setVals, custom, setCustom, qty, setQty }) {
+  const [open, setOpen] = useState(true);
+  const entries = getPresetEntries(DIET_PRESETS[title]);
+  const isNested = entries.some((e) => e.subsection);
+
+  const toggleVal = (key, v) =>
+    setVals((prev) => ({ ...prev, [key]: prev[key] === v ? "" : v }));
+  const setQtyVal = (key, v) =>
+    setQty((prev) => ({ ...prev, [key]: v }));
   const addCustom = () => setCustom((c) => [...c, { label: "", val: "" }]);
   const updateCustom = (i, field, v) =>
     setCustom((c) => c.map((r, idx) => (idx === i ? { ...r, [field]: v } : r)));
   const removeCustom = (i) => setCustom((c) => c.filter((_, idx) => idx !== i));
 
   const yesCount =
-    items.filter((it) => vals[it] === "YES").length +
+    entries.filter((e) => vals[e.key] === "YES").length +
     custom.filter((c) => c.val === "YES").length;
+
+  // Group entries by subsection, preserving declaration order, for the
+  // nested "Night Raw Diet" style categories.
+  const groups = [];
+  const groupedEntries = new Map();
+  if (isNested) {
+    entries.forEach((e) => {
+      if (!groupedEntries.has(e.subsection)) {
+        groupedEntries.set(e.subsection, []);
+        groups.push(e.subsection);
+      }
+      groupedEntries.get(e.subsection).push(e);
+    });
+  }
 
   return (
     <div
@@ -363,34 +500,106 @@ function DietCard({ title, vals, setVals, custom, setCustom }) {
       </button>
       {open && (
         <div style={{ padding: "4px 10px 10px", background: "#fff" }}>
-          {items.map((item) => (
-            <div
-              key={item}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 8,
-                padding: "5px 0",
-                borderBottom: "1px solid #f0f7f0",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 10,
-                  color: "#374151",
-                  flex: 1,
-                  lineHeight: 1.3,
-                }}
-              >
-                {item}
-              </span>
-              <YNPills
-                value={vals[item] || ""}
-                onChange={(v) => toggleVal(item, v)}
-              />
-            </div>
-          ))}
+          {isNested
+            ? groups.map((sub, gi) => (
+                <div key={sub} style={{ marginBottom: 4 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                      padding: "8px 0 4px",
+                      marginTop: gi === 0 ? 0 : 4,
+                      borderTop: gi === 0 ? "none" : "1px dashed #d1e7da",
+                    }}
+                  >
+                    <span style={{ fontSize: 13 }}>
+                      {SUBSECTION_EMOJIS[sub] || "•"}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 700,
+                        color: "#0f7a4a",
+                        textTransform: "uppercase",
+                        letterSpacing: 0.6,
+                      }}
+                    >
+                      {gi + 1}. {sub}
+                    </span>
+                  </div>
+                  {groupedEntries.get(sub).map((e) => (
+                    <div
+                      key={e.key}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 8,
+                        padding: "5px 0",
+                        paddingLeft: 4,
+                        borderBottom: "1px solid #f0f7f0",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 10,
+                          color: "#374151",
+                          flex: 1,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {e.label}
+                      </span>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 6,
+                          flexShrink: 0,
+                        }}
+                      >
+                        <QtyStepper
+                          value={qty[e.key]}
+                          onChange={(v) => setQtyVal(e.key, v)}
+                        />
+                        <YNPills
+                          value={vals[e.key] || ""}
+                          onChange={(v) => toggleVal(e.key, v)}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))
+            : entries.map((e) => (
+                <div
+                  key={e.key}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 8,
+                    padding: "5px 0",
+                    borderBottom: "1px solid #f0f7f0",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 10,
+                      color: "#374151",
+                      flex: 1,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {e.label}
+                  </span>
+                  <YNPills
+                    value={vals[e.key] || ""}
+                    onChange={(v) => toggleVal(e.key, v)}
+                  />
+                </div>
+              ))}
           {custom.map((row, i) => (
             <div
               key={i}
@@ -622,9 +831,11 @@ function TherapyCard({ title, checked, setChecked, custom, setCustom }) {
 function makeInitialDietState() {
   const state = {};
   Object.keys(DIET_PRESETS).forEach((title) => {
+    const entries = getPresetEntries(DIET_PRESETS[title]);
     state[title] = {
-      vals: Object.fromEntries(DIET_PRESETS[title].map((i) => [i, ""])),
+      vals: Object.fromEntries(entries.map((e) => [e.key, ""])),
       custom: [],
+      qty: Object.fromEntries(entries.map((e) => [e.key, 1])),
     };
   });
   return state;
@@ -652,14 +863,58 @@ function buildFullFormHtml(patient, dietState, therapyState) {
 
   // Diet rows
   const dietRows = Object.keys(DIET_PRESETS).map((title) => {
-    const { vals, custom } = dietState[title];
-    const items = DIET_PRESETS[title];
+    const { vals, custom, qty } = dietState[title];
+    const entries = getPresetEntries(DIET_PRESETS[title]);
+    const isNested = entries.some((e) => e.subsection);
+
+    if (isNested) {
+      const subOrder = [];
+      const bySub = new Map();
+      entries.forEach((e) => {
+        if (!bySub.has(e.subsection)) {
+          bySub.set(e.subsection, []);
+          subOrder.push(e.subsection);
+        }
+        bySub.get(e.subsection).push(e);
+      });
+      const withQty = (e) =>
+        `${e.label} — Qty: ${(qty && qty[e.key]) || 1}`;
+      const groups = subOrder.map((sub) => {
+        const subEntries = bySub.get(sub);
+        return {
+          sub,
+          emoji: SUBSECTION_EMOJIS[sub] || "•",
+          yItems: subEntries
+            .filter((e) => vals[e.key] === "YES")
+            .map(withQty),
+          nItems: subEntries
+            .filter((e) => vals[e.key] === "NO")
+            .map((e) => e.label),
+        };
+      });
+      const customY = custom
+        .filter((c) => c.label && c.val === "YES")
+        .map((c) => c.label);
+      const customN = custom
+        .filter((c) => c.label && c.val === "NO")
+        .map((c) => c.label);
+      if (customY.length || customN.length) {
+        groups.push({
+          sub: "Additional Items",
+          emoji: "➕",
+          yItems: customY,
+          nItems: customN,
+        });
+      }
+      return { title, emoji: DIET_EMOJIS[title], groups };
+    }
+
     const yItems = [
-      ...items.filter((i) => vals[i] === "YES"),
+      ...entries.filter((e) => vals[e.key] === "YES").map((e) => e.label),
       ...custom.filter((c) => c.label && c.val === "YES").map((c) => c.label),
     ];
     const nItems = [
-      ...items.filter((i) => vals[i] === "NO"),
+      ...entries.filter((e) => vals[e.key] === "NO").map((e) => e.label),
       ...custom.filter((c) => c.label && c.val === "NO").map((c) => c.label),
     ];
     return { title, emoji: DIET_EMOJIS[title], yItems, nItems };
@@ -796,7 +1051,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;font-size:11px;color:#1a2e1e;backgr
 <div class="diet-cards">
 ${dietRows
   .map(
-    ({ title, emoji, yItems, nItems }) => `
+    ({ title, emoji, yItems, nItems, groups }) => `
   <div class="diet-card">
     <div class="diet-card-top">
       <span class="diet-card-emoji">${emoji}</span>
@@ -804,18 +1059,41 @@ ${dietRows
     </div>
     <div class="diet-card-body">
       ${
-        yItems.length === 0 && nItems.length === 0
-          ? '<div style="font-size:9px;color:#94a3b8;font-style:italic">No items marked</div>'
-          : [
-              ...yItems.map(
-                (i) =>
-                  `<div class="item-row"><span>${i}</span><span class="badge-y">✓ YES</span></div>`,
-              ),
-              ...nItems.map(
-                (i) =>
-                  `<div class="item-row"><span>${i}</span><span class="badge-n">✗ NO</span></div>`,
-              ),
-            ].join("")
+        groups
+          ? groups
+              .map(
+                (g, gi) => `
+        <div style="font-size:8.5px;font-weight:700;color:#0f7a4a;text-transform:uppercase;letter-spacing:0.4px;margin:${gi === 0 ? "0" : "6px"} 0 2px">
+          ${g.emoji} ${gi + 1}. ${g.sub}
+        </div>
+        ${
+          g.yItems.length === 0 && g.nItems.length === 0
+            ? '<div style="font-size:9px;color:#94a3b8;font-style:italic">No items marked</div>'
+            : [
+                ...g.yItems.map(
+                  (i) =>
+                    `<div class="item-row"><span>${i}</span><span class="badge-y">✓ YES</span></div>`,
+                ),
+                ...g.nItems.map(
+                  (i) =>
+                    `<div class="item-row"><span>${i}</span><span class="badge-n">✗ NO</span></div>`,
+                ),
+              ].join("")
+        }`,
+              )
+              .join("")
+          : yItems.length === 0 && nItems.length === 0
+            ? '<div style="font-size:9px;color:#94a3b8;font-style:italic">No items marked</div>'
+            : [
+                ...yItems.map(
+                  (i) =>
+                    `<div class="item-row"><span>${i}</span><span class="badge-y">✓ YES</span></div>`,
+                ),
+                ...nItems.map(
+                  (i) =>
+                    `<div class="item-row"><span>${i}</span><span class="badge-n">✗ NO</span></div>`,
+                ),
+              ].join("")
       }
     </div>
   </div>`,
@@ -952,6 +1230,11 @@ export default function PatientForm() {
     setDietState((prev) => ({
       ...prev,
       [title]: { ...prev[title], custom: fn(prev[title].custom) },
+    }));
+  const setCardQty = (title) => (fn) =>
+    setDietState((prev) => ({
+      ...prev,
+      [title]: { ...prev[title], qty: fn(prev[title].qty || {}) },
     }));
 
   const setTherapyChecked = (title) => (fn) =>
@@ -1418,6 +1701,8 @@ export default function PatientForm() {
                       setVals={setCardVals(title)}
                       custom={dietState[title].custom}
                       setCustom={setCardCustom(title)}
+                      qty={dietState[title].qty || {}}
+                      setQty={setCardQty(title)}
                     />
                   ))}
                 </div>
